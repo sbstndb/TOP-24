@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall -Wextra -g
+CFLAGS= -Wall -Wextra -Werror -g
 OFLAGS= -march=native -mtune=native -O3 -finline-functions -funroll-loops -fpeel-loops -ftree-vectorize -ftree-loop-vectorize
 EXE=bench
 
