@@ -17,12 +17,14 @@ if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
 elseif(CMAKE_C_COMPILER_ID STREQUAL "Clang")
         set(DEBUG_OPTIONS -O0 -g3)
         set(RELEASE_OPTIONS -O2 -g)
-        set(OPTIMIZED_OPTIONS -Ofast)	
+        set(OPTIMIZED_OPTIONS -Ofast -march=native -mtune=native -mavx2 -finline-functions -funroll-loops -fpeel-loops -Rpass-analysis=loop-vectorize -Rpass=loop-vectorize)	
 else()
         set(DEBUG_OPTIONS -O0 -g3)
         set(RELEASE_OPTIONS -O2 -g)
         set(OPTIMIZED_OPTIONS -Ofast)
 endif()
+
+
 
 if(CMAKE_BUILD_TYPE STREQUAL "Optimized")
 	target_compile_options(bench PUBLIC ${OPTIMIZED_OPTIONS})
@@ -34,4 +36,8 @@ else()
 	message(WARNING "Build type not supported: ${BUILD_TYPE}. Please try Debug, Release or Optimized.")
 	set(CMAKE_DEBUG_VERSION Release)
 endif()
+
+
+
+
 
